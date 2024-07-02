@@ -3,13 +3,16 @@ import { createElement } from "../jsx/jsx-factory";
 import { renderXmlFile } from "../jsx/render-xml-file";
 
 type PackageProps = {
-  identifier: Identifier;
-  title: string;
-  language: string;
-  modifiedAt?: Date;
+  readonly identifier: Identifier;
+  readonly title: string;
+  readonly language: string;
+  readonly modifiedAt?: Date;
+
+  // Navigation is the only required part of manifest
+  readonly navigation: { path: string };
 };
 
-export const renderPackageFile = ({ identifier, title, language, modifiedAt = new Date() }: PackageProps) => {
+export const renderPackageFile = ({ identifier, title, language, modifiedAt = new Date(), navigation }: PackageProps) => {
   const uniqueIdentifier = "pub-id";
 
   return renderXmlFile(
@@ -22,7 +25,7 @@ export const renderPackageFile = ({ identifier, title, language, modifiedAt = ne
       </metadata>
       <manifest>
         {/* The only required file is nav */}
-        <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav" />
+        <item id="nav" href={navigation.path} media-type="application/xhtml+xml" properties="nav" />
       </manifest>
       <spine>
         {/* At least one item, nav is not required */}

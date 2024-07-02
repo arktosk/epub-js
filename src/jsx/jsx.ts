@@ -40,7 +40,7 @@ type XMLItemElement = {
   properties?: ManifestItemProperty | ManifestItemProperty[];
 };
 
-type XMLMetadata = { "xmlns:dc": string };
+type XMLMetadata = { "xmlns:dc": "http://purl.org/dc/elements/1.1/" };
 
 type XMLDCIdentifierElement = {
   id: string;
@@ -216,6 +216,6 @@ declare namespace JSX {
   export type AnyChildElement = ElementDefinition | number | string | boolean | null;
 
   export interface Fragment {
-    (attrs: { [key: PropertyKey]: void } | undefined, children: NestedArray<AnyChildElement>[]): AnyDefinition[];
+    (attrs: { type?: void } | undefined, children: NestedArray<AnyChildElement>[]): AnyDefinition[];
   }
 }
